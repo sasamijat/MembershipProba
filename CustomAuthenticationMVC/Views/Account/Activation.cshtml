@@ -1,0 +1,17 @@
+﻿@{ViewBag.Title = "Activation";}
+
+<h2>Activation Account</h2>
+
+    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+    {
+        <div class="alert alert-success">
+            <strong>Dobrodosli!</strong>  Vas nalog je aktiviran uspjesno.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Greska!</strong>@ViewBag.Message
+        </div>
+    }
+
