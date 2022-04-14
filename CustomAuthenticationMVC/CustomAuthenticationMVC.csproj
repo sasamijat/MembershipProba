@@ -144,6 +144,10 @@
     <Compile Include="Migrations\202204111313595_Mgrn1.designer.cs">
       <DependentUpon>202204111313595_Mgrn1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204141311557_Mgrn2.cs" />
+    <Compile Include="Migrations\202204141311557_Mgrn2.designer.cs">
+      <DependentUpon>202204141311557_Mgrn2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
@@ -210,6 +214,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202204111313595_Mgrn1.resx">
       <DependentUpon>202204111313595_Mgrn1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204141311557_Mgrn2.resx">
+      <DependentUpon>202204141311557_Mgrn2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

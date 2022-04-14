@@ -19,7 +19,7 @@ namespace CustomAuthenticationMVC.Controllers
         {
             return View();
         }
-        
+
         [HttpGet]
         public ActionResult Login(string ReturnUrl = "")
         {
@@ -30,7 +30,33 @@ namespace CustomAuthenticationMVC.Controllers
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Login(User userObj, string ReturnUrl = "")
+        {
+            if (ModelState.IsValid)
+            {
+                var isValidUser = Membership.ValidateUser(userObj.Username, userObj.Password);
+                if (isValidUser)
+                {
+                    FormsAuthentication.SetAuthCookie(userObj.Username, userObj.RememberMe);
+                    if (Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            ModelState.Remove("Password");
+            return View();
+        }
+               
+       // #region LOGIN LOGIN LOGIN
         
+        /*
         [HttpPost]      
         public ActionResult Login(User userObj, string ReturnUrl = "")
         {
@@ -51,7 +77,7 @@ namespace CustomAuthenticationMVC.Controllers
                            //RoleName = user.RoleName
                            Role = user.RoleName
                         };
-                        string userData = JsonConvert.SerializeObject(userModel);
+                       string userData = JsonConvert.SerializeObject(userModel);
                         FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
                             (
                             1, userObj.Username, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData
@@ -73,15 +99,18 @@ namespace CustomAuthenticationMVC.Controllers
             ModelState.AddModelError("", "Pogresno korisnicko ime ili lozinka ");
             return View(userObj);
         }
-        
-        [HttpGet]
-        
+        #endregion LOGIN LOGIN LOGIN
+        */
+
+        [CustomAuthorize(Roles ="Buyer")]
+        #region REGISTRATION REGISTRATION REGISTRATION
+        [HttpGet]       
         public ActionResult Registration()
         {
             return View();
         }
         [HttpPost]
-       [CustomAuthorize(Roles="User")]
+        [CustomAuthorize(Roles="Buyer")]
         public ActionResult Registration(User userOb)
         {
             bool statusRegistration = false;
@@ -110,7 +139,6 @@ namespace CustomAuthenticationMVC.Controllers
                     dbContext.Users.Add(user);
                     dbContext.SaveChanges();
                 }
-
                // VerificationEmail(userOb.Email, userOb.ActivationCode.ToString());
                 messageRegistration = "Your account has been created successfully. ^_^";
                 statusRegistration = true;
@@ -123,8 +151,10 @@ namespace CustomAuthenticationMVC.Controllers
             ViewBag.Status = statusRegistration;
             return View(userOb);
         }
-        [HttpGet]
-       
+        #endregion REGISTRATION REGISTRATION REGISTRATION
+
+        #region ACTIVATION ACCOUNT
+        [HttpGet]  
         public ActionResult ActivationAccount(string id)
         {
             bool statusAccount = false;
@@ -145,14 +175,20 @@ namespace CustomAuthenticationMVC.Controllers
             ViewBag.Status = statusAccount;
             return View();
         }
+        #endregion
+
+        #region LOGOUT LOGOUT LOGOUT
         public ActionResult LogOut()
         {
             HttpCookie cookie = new HttpCookie("Cookie1", "");
             cookie.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(cookie);
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Account", null);
+            return RedirectToAction("Index", "Home", null);
         }
+        #endregion LOGOUT LOGOUT LOGOUT
+
+        #region VERIFICATION EMAIL 
         /*
         [NonAction]
         [AllowAnonymous]
@@ -184,5 +220,30 @@ namespace CustomAuthenticationMVC.Controllers
         
         }
         */
+        #endregion VerificationEmail VerificationEmail
     }
 }
+
+
+/*
+       [HttpPost]
+       public ActionResult Login(User userObj, string ReturnUrl = "")
+       {
+           if (ModelState.IsValid)
+           {
+               if (new CustomMembership().ValidateUser(userObj.Username, userObj.Password))
+               {
+                   FormsAuthentication.SetAuthCookie(userObj.Username, userObj.Password);
+                   if (!String.IsNullOrEmpty(returnUrl))
+                   {
+                       return Redirect(returnUrl);
+                   }
+                   else
+                   {
+                       return RedirectToAction("Index", "Home");
+                   }
+               }
+
+           }
+       }
+       */

@@ -168,3 +168,4 @@ C:\Users\Sale\source\repos\sasamijat\MembershipProba\CustomAuthenticationMVC\obj
 C:\Users\Sale\source\repos\sasamijat\MembershipProba\CustomAuthenticationMVC\obj\Debug\CustomAuthenticationMVC.csproj.CopyComplete
 C:\Users\Sale\source\repos\sasamijat\MembershipProba\CustomAuthenticationMVC\obj\Debug\CustomAuthenticationMVC.dll
 C:\Users\Sale\source\repos\sasamijat\MembershipProba\CustomAuthenticationMVC\obj\Debug\CustomAuthenticationMVC.pdb
+C:\Users\Sale\source\repos\sasamijat\MembershipProba\CustomAuthenticationMVC\obj\Debug\CustomAuthenticationMVC.Migrations.Mgrn2.resources

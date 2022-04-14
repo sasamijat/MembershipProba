@@ -14,14 +14,14 @@ namespace CustomAuthenticationMVC.Controllers
         {
             return View();
         }
-        [CustomAuthorize(Roles = "Buyer")]
+       [CustomAuthorize(Roles = "Seller")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-        [CustomAuthorize(Roles = "Buyer")]
+       [CustomAuthorize(Roles = "Buyer")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
