@@ -41,6 +41,19 @@ namespace CustomAuthenticationMVC.CustomAuthentication
                 var user = (from us in dbContext.Users
                             where string.Compare(username, us.Username, StringComparison.OrdinalIgnoreCase) == 0
                             select us).FirstOrDefault();
+                var roles = (from ro in dbContext.Roles select ro).ToList();
+                foreach (var r in roles)
+                {
+                    if (r.Users!=null)
+                    {
+                        var us = r.Users.FirstOrDefault(u => u.UserId == user.UserId);
+                        if (us != null)
+                        {
+                            user.Role = r;
+                            break;
+                        }
+                    }
+                }                
 
                 if (user == null)
                 {

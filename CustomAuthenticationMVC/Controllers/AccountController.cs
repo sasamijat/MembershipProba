@@ -19,9 +19,8 @@ namespace CustomAuthenticationMVC.Controllers
         {
             return View();
         }
-
+        
         [HttpGet]
-       
         public ActionResult Login(string ReturnUrl = "")
         {
             if (User.Identity.IsAuthenticated)
@@ -32,8 +31,7 @@ namespace CustomAuthenticationMVC.Controllers
             return View();
         }
         
-        [HttpPost]
-       
+        [HttpPost]      
         public ActionResult Login(User userObj, string ReturnUrl = "")
         {
             if (ModelState.IsValid)
@@ -42,7 +40,6 @@ namespace CustomAuthenticationMVC.Controllers
                 if (memberValid)
                 {
                     var user = (CustomMembershipUser)Membership.GetUser(userObj.Username);
-                    
                     if (user != null)
                     {
                         User userModel = new Models.User()
@@ -52,6 +49,7 @@ namespace CustomAuthenticationMVC.Controllers
                             LastName = user.LastName,
                             //ne moze lista stringova u jedan string
                            //RoleName = user.RoleName
+                           Role = user.RoleName
                         };
                         string userData = JsonConvert.SerializeObject(userModel);
                         FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket

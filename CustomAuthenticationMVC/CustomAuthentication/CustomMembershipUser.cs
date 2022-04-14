@@ -14,7 +14,7 @@ namespace CustomAuthenticationMVC.CustomAuthentication
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Role Role { get; set; }
+        public Role RoleName { get; set; }
         #endregion
         
 
@@ -23,7 +23,7 @@ namespace CustomAuthenticationMVC.CustomAuthentication
             UserId = user.UserId;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            Role = user.Role;
+            RoleName = user.Role;
         }
     }
 }

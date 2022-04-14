@@ -16,7 +16,16 @@ namespace CustomAuthenticationMVC
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            /*
+            
+        }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+       
+    }
+}
+
+/*
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Roles)
                 .WithMany(r => r.Users)
@@ -27,9 +36,3 @@ namespace CustomAuthenticationMVC
                     m.MapRightKey("RoleId");
                 });
             */
-        }
-
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
-    }
-}
